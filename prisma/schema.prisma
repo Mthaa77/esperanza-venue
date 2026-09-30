@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Enquiry {
+  id              String   @id @default(cuid())
+  firstName       String
+  lastName        String
+  email           String
+  phone           String
+  weddingDate     String?
+  guestCount     Int?
+  eventType       String? // Wedding | Corporate | Birthday | Kids Party | Other
+  packageInterest String? // Self-catering | Full-service | Party | Just looking
+  budget          String?
+  message         String
+  status          String   @default("new") // new | contacted | closed
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Newsletter {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  source    String // Google | Facebook | On-site
+  rating    Int // 1-5
+  text      String
+  eventType String? // Wedding | Kids Party | Corporate
+  featured  Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Package {
+  id          String  @id @default(cuid())
+  name        String
+  slug        String  @unique
+  description String
+  priceFrom   Int // starting price in ZAR cents
+  features    String // newline-separated list
+  popular     Boolean @default(false)
+  order       Int     @default(0)
+}
+
+model AvailableDate {
+  id        String   @id @default(cuid())
+  date      String   @unique // ISO date string (YYYY-MM-DD)
+  status    String   @default("open") // open | held | booked
+  isWeekend Boolean  @default(false)
+  discount  Int?     // percentage discount for weekday specials (e.g. 15)
+  note      String?  // optional note (e.g. "Spring special")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

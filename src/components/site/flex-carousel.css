@@ -1,0 +1,226 @@
+/* FlexCarousel — premium WebGL bent-card carousel */
+
+.flex-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  overflow: hidden;
+  background: transparent;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+}
+.flex-carousel:active {
+  cursor: grabbing;
+}
+
+.flex-carousel__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.flex-carousel__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.flex-carousel__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+}
+
+.flex-carousel__counter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.15rem;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.flex-carousel__counter-current {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f5b942;
+}
+
+.flex-carousel__counter-divider {
+  opacity: 0.4;
+}
+
+.flex-carousel__counter-total {
+  opacity: 0.6;
+}
+
+.flex-carousel__hint {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+  background: rgba(15, 12, 8, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.flex-carousel__bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem 1.75rem;
+  gap: 1rem;
+}
+
+.flex-carousel__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-width: 60%;
+}
+
+.flex-carousel__caption-category {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #f5b942;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.flex-carousel__caption-title {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.flex-carousel__nav {
+  display: flex;
+  gap: 0.5rem;
+  pointer-events: auto;
+}
+
+.flex-carousel__nav-btn {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(15, 12, 8, 0.4);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.flex-carousel__nav-btn:hover {
+  transform: scale(1.1);
+  border-color: rgba(245, 185, 66, 0.5);
+  background: rgba(15, 12, 8, 0.6);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.flex-carousel__nav-btn:active {
+  transform: scale(0.95);
+}
+
+.flex-carousel__nav-btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Dots indicator */
+.flex-carousel__dots {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.375rem;
+  z-index: 3;
+  pointer-events: auto;
+}
+
+.flex-carousel__dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flex-carousel__dot--active {
+  width: 2rem;
+  background: linear-gradient(90deg, transparent, #f5b942, transparent);
+}
+
+/* Loading state */
+.flex-carousel__loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: oklch(0.94 0.02 85);
+  z-index: 10;
+  transition: opacity 0.5s;
+}
+
+.flex-carousel__loading--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.flex-carousel__loading-spinner {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: 3px solid oklch(0.88 0.025 80);
+  border-top-color: oklch(0.42 0.09 145);
+  animation: flex-carousel-spin 0.8s linear infinite;
+}
+
+@keyframes flex-carousel-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .flex-carousel {
+    min-height: 320px;
+  }
+  .flex-carousel__caption-title {
+    font-size: 1.1rem;
+  }
+  .flex-carousel__nav-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .flex-carousel__bottom {
+    padding: 0.75rem 1rem 1.25rem;
+  }
+}
