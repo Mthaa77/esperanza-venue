@@ -53,16 +53,16 @@
   --card-foreground: oklch(0.28 0.035 50);
   --popover: oklch(0.995 0.008 85);
   --popover-foreground: oklch(0.28 0.035 50);
-  /* Forest green primary */
-  --primary: oklch(0.42 0.09 145);
+  /* Deep botanical green, lifted for stronger contrast against the photography */
+  --primary: oklch(0.36 0.10 151);
   --primary-foreground: oklch(0.985 0.012 85);
-  /* Warm gold secondary */
-  --secondary: oklch(0.92 0.04 85);
-  --secondary-foreground: oklch(0.30 0.05 50);
-  --muted: oklch(0.94 0.02 85);
-  --muted-foreground: oklch(0.48 0.03 60);
-  /* Barn wood accent */
-  --accent: oklch(0.50 0.08 55);
+  /* Soft marigold secondary */
+  --secondary: oklch(0.91 0.07 88);
+  --secondary-foreground: oklch(0.27 0.05 50);
+  --muted: oklch(0.935 0.035 82);
+  --muted-foreground: oklch(0.43 0.04 58);
+  /* Terracotta accent pulled from the venue wood and brick */
+  --accent: oklch(0.53 0.13 42);
   --accent-foreground: oklch(0.985 0.012 85);
   --destructive: oklch(0.58 0.22 27);
   --border: oklch(0.88 0.025 80);

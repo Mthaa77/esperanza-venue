@@ -292,6 +292,11 @@ export const ADD_ONS: AddOn[] = [
 
 export const GALLERY_IMAGES = [
   // NEW — premium real-wedding photos
+  { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/FB_IMG_1790835015425-BiDzvKBKtgAbgTdwkiUISMgA51CL8r.jpg", alt: "Newlywed couple posing with their flower-crowned donkey in the garden", tag: "A day with a difference", category: "Animals" },
+  { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/FB_IMG_1790835047965-yeldi76FAVHUBR8RR7BjXv2h1dae4f.jpg", alt: "Bride and groom walking through their wedding guests and rustic gates", tag: "The ceremony entrance", category: "Ceremony" },
+  { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/FB_IMG_1790835064984-8obFW1S0pWplVzY1bqNeLNj97hK2z5.jpg", alt: "Esperanza Wedding Venue welcome sign surrounded by greenery and a rearing horse statue", tag: "Welcome to Esperanza", category: "Details" },
+  { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/FB_IMG_1790835085842-2J4XySkdQNOUT5qn2MwRnrmUsyvzrJ.jpg", alt: "Wedding geese walking down the rustic venue path", tag: "Farmyard friends", category: "Animals" },
+  { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/FB_IMG_1790835021818-FHicRVNpyNKDZIBNf2U1ShXShPipbT.jpg", alt: "Newlywed couple walking with their flower-crowned donkey across the lawn", tag: "Real moments", category: "Animals" },
   { src: "/images/couple-dancing.jpg", alt: "Bride and groom dancing under golden string lights at twilight", tag: "First dance", category: "Reception" },
   { src: "/images/confetti-ceremony.jpeg", alt: "Bride and groom in Scottish kilt walking through confetti shower", tag: "Confetti send-off", category: "Ceremony" },
   { src: "/images/collage-floral-arch.jpg", alt: "Couple under floral arch of pampas grass and white blooms", tag: "Floral arch", category: "Ceremony" },
