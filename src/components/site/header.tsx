@@ -176,18 +176,18 @@ export function Header() {
         </div>
         <div
           className={cn(
-            "overflow-hidden border-t bg-[#1c1712]/[0.97] shadow-[0_24px_60px_oklch(0.08_0.03_45_/_0.45)] backdrop-blur-2xl transition-all duration-500 xl:hidden",
-            open ? "max-h-[calc(100svh-5rem)] border-amber-300/25 opacity-100" : "max-h-0 border-transparent opacity-0"
+            "overflow-hidden border-t bg-[#fffaf0] text-[#2c211a] shadow-[0_24px_60px_oklch(0.18_0.04_45_/_0.2)] transition-all duration-500 xl:hidden",
+            open ? "max-h-[min(70svh,38rem)] border-amber-300/35 opacity-100" : "max-h-0 border-transparent opacity-0"
           )}
         >
-          <div className="flex items-center justify-between px-5 pb-1 pt-4">
+          <div className="flex items-center justify-between border-b border-amber-900/10 px-5 pb-4 pt-5">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-amber-700">Explore Esperanza</p>
-              <p className="mt-1 font-serif text-lg text-amber-50">Your day, your way</p>
+              <p className="mt-1 font-serif text-lg text-[#2c211a]">Your day, your way</p>
             </div>
             <span className="grid size-9 place-items-center rounded-full border border-amber-400/30 bg-amber-50 text-amber-700 shadow-sm" aria-hidden="true">✦</span>
           </div>
-          <nav className="max-h-[calc(100svh-16rem)] overflow-y-auto overscroll-contain p-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Mobile navigation">
+          <nav className="grid max-h-[calc(70svh-10rem)] grid-cols-2 gap-2 overflow-y-auto overscroll-contain p-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Mobile navigation">
             {NAV_LINKS.map((link, i) => (
               <a
                 key={link.href}
@@ -195,13 +195,11 @@ export function Header() {
                 onClick={() => setOpen(false)}
                 style={{ transitionDelay: open ? `${i * 35}ms` : "0ms" }}
                 className={cn(
-                  "group flex items-center justify-between rounded-2xl border border-transparent px-4 py-3.5 text-sm font-semibold transition-all duration-300",
+                  "group flex min-h-12 items-center justify-between rounded-xl border border-amber-900/10 bg-white/70 px-3.5 py-3 text-sm font-semibold text-[#3b2a20] shadow-sm transition-all duration-300",
                   open ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0",
                   activeSection === link.href
                       ? "border-primary/20 bg-primary text-primary-foreground shadow-lg"
-                    : scrolled
-                      ? "text-foreground/75 hover:border-amber-300/25 hover:bg-secondary hover:text-foreground"
-                      : "text-amber-50/85 hover:border-amber-200/20 hover:bg-white/10 hover:text-white"
+                    : "hover:border-amber-500/40 hover:bg-amber-50 hover:text-primary hover:shadow-md"
                 )}
               >
                 <span>{link.label}</span>
@@ -209,8 +207,8 @@ export function Header() {
               </a>
             ))}
           </nav>
-          <div className="grid grid-cols-2 gap-2 border-t border-amber-300/15 p-3">
-            <a href={`tel:${CONTACT.phoneChrista.replace(/\s/g, "")}`} onClick={() => setOpen(false)} className={cn("flex h-11 items-center justify-center gap-2 rounded-full border text-xs font-semibold", scrolled ? "border-border bg-card text-foreground" : "border-white/15 bg-white/10 text-white")}>
+          <div className="grid grid-cols-2 gap-2 border-t border-amber-900/10 bg-amber-50/70 p-4">
+            <a href={`tel:${CONTACT.phoneChrista.replace(/\s/g, "")}`} onClick={() => setOpen(false)} className={cn("flex h-11 items-center justify-center gap-2 rounded-full border text-xs font-semibold", "border-amber-900/15 bg-white text-[#3b2a20] hover:bg-amber-50")}>
               <Phone className="size-4" /> Call
             </a>
             <a href="#enquiry" onClick={() => setOpen(false)} className="flex h-11 items-center justify-center gap-2 rounded-full bg-gold-gradient text-xs font-bold text-black shadow-gold-glow">
