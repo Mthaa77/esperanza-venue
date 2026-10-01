@@ -94,7 +94,7 @@ export function Header() {
           {/* Desktop nav — inline links inside the floating pill */}
           <nav
             data-main-nav
-            className="hidden items-center gap-0.5 lg:flex"
+            className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 xl:flex"
             aria-label="Main navigation"
           >
             {NAV_LINKS.map((link) => (
@@ -115,7 +115,7 @@ export function Header() {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden items-center gap-2 lg:flex">
+          <div className="hidden shrink-0 items-center gap-2 xl:flex">
             <a
               href={waLink}
               target="_blank"
@@ -142,14 +142,28 @@ export function Header() {
           </div>
 
           {/* Mobile menu */}
-          <div className="lg:hidden">
+          <div className="flex shrink-0 items-center gap-2 xl:hidden">
+            <a
+              href={waLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Message Esperanza on WhatsApp"
+              className={cn(
+                "inline-flex size-10 items-center justify-center rounded-full transition-all duration-300",
+                scrolled
+                  ? "border border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
+                  : "border border-white/20 bg-white/10 text-white hover:border-emerald-300/50 hover:bg-emerald-400/15"
+              )}
+            >
+              <WhatsAppIcon className="size-4" />
+            </a>
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
                 <button
                   type="button"
                   aria-label="Open menu"
                   className={cn(
-                    "inline-flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300",
+                    "inline-flex size-10 items-center justify-center rounded-full transition-all duration-300",
                     scrolled
                       ? "bg-muted text-foreground hover:bg-accent"
                       : "glass-dark text-white"
