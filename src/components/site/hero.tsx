@@ -94,9 +94,14 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-5xl px-4 py-24 text-center sm:px-6">
+      <div className="relative z-10 mx-auto w-full max-w-5xl px-4 py-24 text-center sm:px-6 lg:py-28">
+        <div className="hero-ornament mx-auto mb-7 flex max-w-xs items-center justify-center gap-3 text-amber-200/80" aria-hidden="true">
+          <span className="h-px flex-1 bg-gradient-to-r from-transparent to-amber-200/70" />
+          <span className="grid size-8 place-items-center rounded-full border border-amber-200/45 bg-black/20 text-sm backdrop-blur-sm">✦</span>
+          <span className="h-px flex-1 bg-gradient-to-l from-transparent to-amber-200/70" />
+        </div>
         <div className="reveal-up" style={delay(0)}>
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white backdrop-blur-md">
+          <span             className="inline-flex items-center gap-2 rounded-full border border-amber-200/40 bg-black/25 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-amber-100 shadow-[0_12px_40px_oklch(0.1_0.03_50_/_0.2)] backdrop-blur-md">
             <MapPin className="h-3.5 w-3.5" />
             Pretoria East · Gauteng
           </span>
@@ -227,6 +232,10 @@ export function Hero() {
         >
           Bekostigbaar · Self-katering of vol-diens · Troeteldier-vriendelik
         </p>
+      </div>
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex translate-y-1/2 justify-center" aria-hidden="true">
+        <div className="section-divider section-divider-dark" />
       </div>
 
       {/* Scroll hint */}
