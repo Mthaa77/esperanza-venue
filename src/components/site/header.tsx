@@ -176,11 +176,18 @@ export function Header() {
         </div>
         <div
           className={cn(
-            "overflow-hidden border-t transition-all duration-500 xl:hidden",
-            open ? "max-h-[calc(100svh-5rem)] border-amber-300/20 opacity-100" : "max-h-0 border-transparent opacity-0"
+            "overflow-hidden border-t bg-[#1c1712]/[0.97] shadow-[0_24px_60px_oklch(0.08_0.03_45_/_0.45)] backdrop-blur-2xl transition-all duration-500 xl:hidden",
+            open ? "max-h-[calc(100svh-5rem)] border-amber-300/25 opacity-100" : "max-h-0 border-transparent opacity-0"
           )}
         >
-          <nav className="max-h-[calc(100svh-13rem)] overflow-y-auto overscroll-contain p-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Mobile navigation">
+          <div className="flex items-center justify-between px-5 pb-1 pt-4">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-amber-700">Explore Esperanza</p>
+              <p className="mt-1 font-serif text-lg text-amber-50">Your day, your way</p>
+            </div>
+            <span className="grid size-9 place-items-center rounded-full border border-amber-400/30 bg-amber-50 text-amber-700 shadow-sm" aria-hidden="true">✦</span>
+          </div>
+          <nav className="max-h-[calc(100svh-16rem)] overflow-y-auto overscroll-contain p-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Mobile navigation">
             {NAV_LINKS.map((link, i) => (
               <a
                 key={link.href}
@@ -188,13 +195,13 @@ export function Header() {
                 onClick={() => setOpen(false)}
                 style={{ transitionDelay: open ? `${i * 35}ms` : "0ms" }}
                 className={cn(
-                  "flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold transition-all duration-300",
+                  "group flex items-center justify-between rounded-2xl border border-transparent px-4 py-3.5 text-sm font-semibold transition-all duration-300",
                   open ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0",
                   activeSection === link.href
-                    ? "bg-primary text-primary-foreground shadow-lg"
+                      ? "border-primary/20 bg-primary text-primary-foreground shadow-lg"
                     : scrolled
-                      ? "text-foreground/75 hover:bg-secondary hover:text-foreground"
-                      : "text-white/80 hover:bg-white/10 hover:text-white"
+                      ? "text-foreground/75 hover:border-amber-300/25 hover:bg-secondary hover:text-foreground"
+                      : "text-amber-50/85 hover:border-amber-200/20 hover:bg-white/10 hover:text-white"
                 )}
               >
                 <span>{link.label}</span>
