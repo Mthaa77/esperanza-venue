@@ -23,7 +23,13 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+// Only the real, live site should be indexable and claim the venue's canonical URL.
+// Demo/preview deployments (the default) are noindex and have no canonical. Set
+// SITE_INDEXABLE=true in the production environment when this goes live on the client's domain.
+const INDEXABLE = process.env.SITE_INDEXABLE === "true";
+
 export const metadata: Metadata = {
+  robots: INDEXABLE ? { index: true, follow: true } : { index: false, follow: false },
   metadataBase: new URL("https://esperanzaweddings.co.za"),
   title: "Esperanza Wedding Venue | Rustic Farm Weddings in Pretoria East",
   description:
@@ -46,7 +52,7 @@ export const metadata: Metadata = {
     title: "Esperanza Wedding Venue | Rustic Farm Weddings in Pretoria East",
     description:
       "A working equestrian farm & rustic wedding venue on the Pienaars River. Forest chapel, barn reception, donkeys serving drinks, horses & farm animals.",
-    url: "https://esperanzaweddings.co.za",
+    ...(INDEXABLE ? { url: "https://esperanzaweddings.co.za" } : {}),
     siteName: "Esperanza Wedding Venue",
     type: "website",
     locale: "en_ZA",
@@ -57,7 +63,7 @@ export const metadata: Metadata = {
     description:
       "A working equestrian farm & rustic wedding venue on the Pienaars River. Forest chapel, barn reception, donkeys serving drinks.",
   },
-  alternates: { canonical: "https://esperanzaweddings.co.za" },
+  ...(INDEXABLE ? { alternates: { canonical: "https://esperanzaweddings.co.za" } } : {}),
 };
 
 const organizationSchema = {

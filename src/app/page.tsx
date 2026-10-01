@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import { SEED_PACKAGES, SEED_TESTIMONIALS } from "@/lib/fallback-data";
 import { Header } from "@/components/site/header";
 import { AnnouncementBar } from "@/components/site/announcement-bar";
 import { PromoBanner } from "@/components/site/promo-banner";
@@ -34,27 +35,43 @@ import { AdminPanel } from "@/components/site/admin-panel";
 // Revalidate every 60 minutes so seed/admin edits appear without a hard refresh
 export const revalidate = 3600;
 
+function formatPrice(cents: number) {
+  return `R${(cents / 100).toLocaleString("en-US", { maximumFractionDigits: 0 })}`;
+}
+
+const FALLBACK_PACKAGES: Package[] = SEED_PACKAGES.map((p) => ({
+  ...p,
+  id: `fallback-${p.slug}`,
+  priceDisplay: formatPrice(p.priceFrom),
+}));
+
+const FALLBACK_TESTIMONIALS: Testimonial[] = SEED_TESTIMONIALS.map((t, i) => ({
+  ...t,
+  id: `fallback-${i}`,
+}));
+
+// If the database is empty or unreachable (e.g. SQLite on a serverless host), fall back to the
+// bundled seed content so the page never renders blank pricing or reviews.
 async function getPackages(): Promise<Package[]> {
   try {
     const rows = await db.package.findMany({
       orderBy: { order: "asc" },
     });
+    if (rows.length === 0) return FALLBACK_PACKAGES;
     return rows.map((p) => ({
       id: p.id,
       name: p.name,
       slug: p.slug,
       description: p.description,
       priceFrom: p.priceFrom,
-      priceDisplay: `R${(p.priceFrom / 100).toLocaleString("en-US", {
-        maximumFractionDigits: 0,
-      })}`,
+      priceDisplay: formatPrice(p.priceFrom),
       features: p.features,
       popular: p.popular,
       order: p.order,
     }));
   } catch (err) {
-    console.error("[page] failed to load packages:", err);
-    return [];
+    console.error("[page] failed to load packages, using fallback:", err);
+    return FALLBACK_PACKAGES;
   }
 }
 
@@ -63,6 +80,7 @@ async function getTestimonials(): Promise<Testimonial[]> {
     const rows = await db.testimonial.findMany({
       orderBy: [{ featured: "desc" }, { createdAt: "desc" }],
     });
+    if (rows.length === 0) return FALLBACK_TESTIMONIALS;
     return rows.map((t) => ({
       id: t.id,
       name: t.name,
@@ -73,8 +91,8 @@ async function getTestimonials(): Promise<Testimonial[]> {
       featured: t.featured,
     }));
   } catch (err) {
-    console.error("[page] failed to load testimonials:", err);
-    return [];
+    console.error("[page] failed to load testimonials, using fallback:", err);
+    return FALLBACK_TESTIMONIALS;
   }
 }
 
