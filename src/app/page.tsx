@@ -1,10 +1,8 @@
 import { db } from "@/lib/db";
 import { SEED_PACKAGES, SEED_TESTIMONIALS } from "@/lib/fallback-data";
 import { Header } from "@/components/site/header";
-import { AnnouncementBar } from "@/components/site/announcement-bar";
 import { PromoBanner } from "@/components/site/promo-banner";
 import { Hero } from "@/components/site/hero";
-import { LiveTicker } from "@/components/site/live-ticker";
 import { About } from "@/components/site/about";
 import { Chapels } from "@/components/site/chapels";
 import { BarnVenue } from "@/components/site/barn-venue";
@@ -110,13 +108,11 @@ export default async function Home() {
 
       <Header />
       <div className="pt-14">
-        <AnnouncementBar />
         <PromoBanner />
       </div>
 
       <main id="main" className="flex-1 pattern-grain">
         <Hero />
-        <LiveTicker />
         <Gallery />
         <div className="pattern-botanical">
           <About />

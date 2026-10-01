@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, Phone, Calendar, X, Star } from "lucide-react";
+import { Menu, Phone, Calendar, X, Star, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { NAV_LINKS, CONTACT, BRAND_ASSETS } from "./data";
@@ -103,7 +103,7 @@ export function Header() {
                 href={link.href}
                 data-target={link.href}
                 className={cn(
-                  "nav-link-premium rounded-full px-3 py-1.5 text-[13px] font-medium transition-all duration-300",
+                  "nav-link-premium relative rounded-full px-3 py-2 text-[12px] font-semibold tracking-[0.01em] transition-all duration-300 after:absolute after:inset-x-3 after:bottom-0.5 after:h-px after:origin-center after:scale-x-0 after:bg-current after:transition-transform hover:after:scale-x-100",
                   scrolled
                     ? "text-foreground/70 hover:text-amber-700"
                     : "text-white/85 hover:text-white"
@@ -137,6 +137,7 @@ export function Header() {
               <a href="#enquiry">
                 <Calendar className="h-3.5 w-3.5" />
                 Enquire
+                <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
             </Button>
           </div>
