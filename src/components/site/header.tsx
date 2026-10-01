@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, Phone, Calendar, X, Star } from "lucide-react";
+import { Menu, Phone, Calendar, X, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { NAV_LINKS, CONTACT, BRAND_ASSETS } from "./data";
 import { WhatsAppIcon } from "./icons";
 import { ScrollProgress, ActiveSectionStyles } from "./scroll-progress";
@@ -103,7 +102,7 @@ export function Header() {
                 href={link.href}
                 data-target={link.href}
                 className={cn(
-                  "nav-link-premium rounded-full px-3 py-1.5 text-[13px] font-medium transition-all duration-300",
+                  "nav-link-premium relative rounded-full px-3 py-2 text-[12px] font-semibold tracking-[0.01em] transition-all duration-300 after:absolute after:inset-x-3 after:bottom-0.5 after:h-px after:origin-center after:scale-x-0 after:bg-current after:transition-transform hover:after:scale-x-100",
                   scrolled
                     ? "text-foreground/70 hover:text-amber-700"
                     : "text-white/85 hover:text-white"
@@ -137,6 +136,7 @@ export function Header() {
               <a href="#enquiry">
                 <Calendar className="h-3.5 w-3.5" />
                 Enquire
+                <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
             </Button>
           </div>
@@ -157,131 +157,65 @@ export function Header() {
             >
               <WhatsAppIcon className="size-4" />
             </a>
-            <Sheet open={open} onOpenChange={setOpen}>
-              <SheetTrigger asChild>
-                <button
-                  type="button"
-                  aria-label="Open menu"
-                  className={cn(
-                    "inline-flex size-10 items-center justify-center rounded-full transition-all duration-300",
-                    scrolled
-                      ? "bg-muted text-foreground hover:bg-accent"
-                      : "glass-dark text-white"
-                  )}
-                >
-                  <Menu className="h-5 w-5" />
-                </button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-full max-w-sm border-l border-amber-400/20 p-0" style={{ boxShadow: "-20px 0 60px oklch(0.40 0.06 50 / 0.15)" }}>
-                <SheetTitle className="sr-only">Navigation</SheetTitle>
-                <div className="flex h-full flex-col bg-gradient-to-b from-background via-background to-muted/20">
-                  {/* Premium tray header with luxury mesh bg */}
-                  <div className="relative flex flex-col gap-4 overflow-hidden border-b border-amber-400/15 px-6 pb-6 pt-7">
-                    <div className="pointer-events-none absolute inset-0 bg-luxury-mesh" />
-                    <div className="relative flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-amber-400/40 shadow-gold-glow">
-                          <Image
-                            src={BRAND_ASSETS.logo3dSign}
-                            alt="Esperanza Wedding Venue 3D logo"
-                            fill
-                            sizes="48px"
-                            className="object-cover"
-                          />
-                        </span>
-                        <div className="flex flex-col leading-none">
-                          <span
-                            className="text-xl font-semibold text-foreground"
-                            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-                          >
-                            Esperanza
-                          </span>
-                          <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-amber-600">Wedding Venue</span>
-                        </div>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => setOpen(false)}
-                        aria-label="Close menu"
-                        className="grid h-9 w-9 place-items-center rounded-full bg-muted text-muted-foreground transition-all hover:bg-accent hover:text-foreground hover:rotate-90"
-                      >
-                        <X className="h-5 w-5" />
-                      </button>
-                    </div>
-                    {/* Afrikaans tagline in header */}
-                    <p className="relative font-serif text-sm italic text-amber-700/70">
-                      &ldquo;ŉ Troue met &apos;n verskil&rdquo;
-                    </p>
-                  </div>
-                  {/* Premium tray nav links */}
-                  <nav className="flex flex-1 flex-col gap-0.5 overflow-y-auto p-3" aria-label="Mobile navigation">
-                    {NAV_LINKS.map((link, i) => {
-                      const isActive = activeSection === link.href;
-                      return (
-                        <a
-                          key={link.href}
-                          href={link.href}
-                          onClick={() => setOpen(false)}
-                          aria-current={isActive ? "true" : undefined}
-                          style={{ animationDelay: `${i * 35}ms` }}
-                          className={cn(
-                            "flex animate-fade-in-scale items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300",
-                            isActive
-                              ? "bg-gradient-to-r from-amber-50 to-amber-50/30 text-amber-700 shadow-premium-sm border-l-[3px] border-amber-400"
-                              : "text-foreground/75 hover:bg-amber-50/30 hover:text-amber-800"
-                          )}
-                        >
-                          <span className={cn("transition-transform duration-300", isActive && "translate-x-1.5")}>
-                            {link.label}
-                          </span>
-                          {isActive ? (
-                            <span className="h-2 w-2 rounded-full bg-amber-500 shadow-gold-glow" aria-hidden="true" />
-                          ) : (
-                            <span className="h-1 w-1 rounded-full bg-border" aria-hidden="true" />
-                          )}
-                        </a>
-                      );
-                    })}
-                  </nav>
-                  {/* Premium tray CTA footer */}
-                  <div className="space-y-2.5 border-t border-amber-400/15 bg-gradient-to-t from-amber-50/20 to-transparent p-4">
-                    <a
-                      href={waLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setOpen(false)}
-                      className="flex h-12 w-full items-center justify-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 text-sm font-medium text-emerald-700 transition-all duration-300 hover:scale-[1.02] hover:bg-emerald-100 hover:shadow-emerald-glow"
-                    >
-                      <WhatsAppIcon className="h-4 w-4" />
-                      WhatsApp Marina
-                    </a>
-                    <a
-                      href={`tel:${CONTACT.phoneChrista.replace(/\s/g, "")}`}
-                      onClick={() => setOpen(false)}
-                      className="flex h-12 w-full items-center justify-center gap-2 rounded-full border border-border bg-card text-sm font-medium transition-all hover:bg-accent"
-                    >
-                      <Phone className="h-4 w-4" />
-                      Call Christa
-                    </a>
-                    <Button
-                      asChild
-                      className="h-12 w-full rounded-full bg-gold-gradient text-black shadow-gold-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-gold-glow-lg"
-                    >
-                      <a href="#enquiry" onClick={() => setOpen(false)}>
-                        <Calendar className="h-4 w-4" />
-                        Enquire now
-                      </a>
-                    </Button>
-                    {/* Rating badge */}
-                    <div className="flex items-center justify-center gap-1 pt-1 text-xs text-muted-foreground">
-                      <Star className="h-3 w-3 text-amber-400 fill-amber-400" />
-                      <span className="font-medium">{CONTACT.stats.rating}★</span>
-                      <span>· {CONTACT.stats.reviewCount} Google reviews</span>
-                    </div>
-                  </div>
-                </div>
-              </SheetContent>
-            </Sheet>
+            <button
+              type="button"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              onClick={() => setOpen((value) => !value)}
+              className={cn(
+                "group inline-flex size-10 items-center justify-center rounded-full transition-all duration-300",
+                scrolled ? "bg-primary text-primary-foreground shadow-lg" : "glass-dark text-white"
+              )}
+            >
+              <span className="relative block size-5">
+                <Menu className={cn("absolute inset-0 size-5 transition-all duration-300", open ? "rotate-90 scale-0 opacity-0" : "scale-100 opacity-100")} />
+                <X className={cn("absolute inset-0 size-5 transition-all duration-300", open ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-0 opacity-0")} />
+              </span>
+            </button>
+          </div>
+        </div>
+        <div
+          className={cn(
+            "overflow-hidden border-t bg-[#1c1712]/[0.97] shadow-[0_24px_60px_oklch(0.08_0.03_45_/_0.45)] backdrop-blur-2xl transition-all duration-500 xl:hidden",
+            open ? "max-h-[calc(100svh-5rem)] border-amber-300/25 opacity-100" : "max-h-0 border-transparent opacity-0"
+          )}
+        >
+          <div className="flex items-center justify-between px-5 pb-1 pt-4">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-amber-700">Explore Esperanza</p>
+              <p className="mt-1 font-serif text-lg text-amber-50">Your day, your way</p>
+            </div>
+            <span className="grid size-9 place-items-center rounded-full border border-amber-400/30 bg-amber-50 text-amber-700 shadow-sm" aria-hidden="true">✦</span>
+          </div>
+          <nav className="max-h-[calc(100svh-16rem)] overflow-y-auto overscroll-contain p-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Mobile navigation">
+            {NAV_LINKS.map((link, i) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                style={{ transitionDelay: open ? `${i * 35}ms` : "0ms" }}
+                className={cn(
+                  "group flex items-center justify-between rounded-2xl border border-transparent px-4 py-3.5 text-sm font-semibold transition-all duration-300",
+                  open ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0",
+                  activeSection === link.href
+                      ? "border-primary/20 bg-primary text-primary-foreground shadow-lg"
+                    : scrolled
+                      ? "text-foreground/75 hover:border-amber-300/25 hover:bg-secondary hover:text-foreground"
+                      : "text-amber-50/85 hover:border-amber-200/20 hover:bg-white/10 hover:text-white"
+                )}
+              >
+                <span>{link.label}</span>
+                <ArrowUpRight className="size-4 opacity-60" />
+              </a>
+            ))}
+          </nav>
+          <div className="grid grid-cols-2 gap-2 border-t border-amber-300/15 p-3">
+            <a href={`tel:${CONTACT.phoneChrista.replace(/\s/g, "")}`} onClick={() => setOpen(false)} className={cn("flex h-11 items-center justify-center gap-2 rounded-full border text-xs font-semibold", scrolled ? "border-border bg-card text-foreground" : "border-white/15 bg-white/10 text-white")}>
+              <Phone className="size-4" /> Call
+            </a>
+            <a href="#enquiry" onClick={() => setOpen(false)} className="flex h-11 items-center justify-center gap-2 rounded-full bg-gold-gradient text-xs font-bold text-black shadow-gold-glow">
+              <Calendar className="size-4" /> Enquire
+            </a>
           </div>
         </div>
       </header>

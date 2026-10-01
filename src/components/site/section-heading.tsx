@@ -35,9 +35,11 @@ export function SectionHeading({
         >
           {align === "center" && (
             <>
-              <span className="h-px w-10 bg-gradient-to-r from-transparent to-amber-500/50" aria-hidden="true" />
+              <span className="h-px w-14 bg-gradient-to-r from-transparent via-amber-500/40 to-amber-500/80" aria-hidden="true" />
+              <span className="grid size-5 place-items-center rounded-full border border-amber-500/45 text-[9px] text-amber-600" aria-hidden="true">✦</span>
               {eyebrow}
-              <span className="h-px w-10 bg-gradient-to-l from-transparent to-amber-500/50" aria-hidden="true" />
+              <span className="grid size-5 place-items-center rounded-full border border-amber-500/45 text-[9px] text-amber-600" aria-hidden="true">✦</span>
+              <span className="h-px w-14 bg-gradient-to-l from-transparent via-amber-500/40 to-amber-500/80" aria-hidden="true" />
             </>
           )}
           {align === "left" && eyebrow}
